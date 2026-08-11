@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Довольный Слон | Премиум Ивенты & Шоу</title>
+><link rel="stylesheet" href="css/styles.css">
+    <!-- Подключаем стильный шрифт с поддержкой кириллицы -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ЭКРАН 1: Конверт с печатью (Welcome Screen) -->
+    <section id="welcome-screen" class="welcome-screen">
+        <div class="envelope-wrapper">
+            <img src="assets/images/envelope-bg.webp" alt="Премиум конверт" class="envelope-bg">
+            <button id="seal-button" class="seal-button" aria-label="Вскрыть печать">
+                <img src="assets/images/seal-stamp.png" alt="Печать Довольный Слон" class="seal-stamp">
+            </button>
+        </div>
+        <p class="welcome-hint">Нажмите на печать, чтобы открыть приглашение</p>
+    </section>
+
+    <!-- ЭКРАН 2: Главный интерфейс (HUB) -->
+    <main id="main-hub" class="main-hub hidden">
+        
+        <!-- Хедер -->
+        <header class="site-header">
+            <div class="logo">
+                <img src="assets/images/seal-stamp.png" alt="Логотип" class="header-logo">
+                <span class="brand-title">ДОВОЛЬНЫЙ СЛОН</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#showcase">Аудио-витрина</a>
+                <a href="#about">О нас</a>
+                <a href="#contacts" class="btn-gold">Связаться</a>
+            </nav>
+        </header>
+
+        <!-- Герой-блок -->
+        <section class="hero-section">
+            <h1 class="hero-title">События, которые невозможно забыть</h1>
+            <p class="hero-subtitle">Создаем эксклюзивную атмосферу для свадеб, юбилеев и закрытых мероприятий</p>
+        </section>
+
+        <!-- Раздел с Аудио-плеером -->
+        <section id="showcase" class="showcase-section">
+            <h2 class="section-title">Аудио-Атмосфера</h2>
+            <div class="audio-grid">
+                
+                <!-- Карточка 1: Свадьбы -->
+                <div class="audio-card">
+                    <div class="card-badge">Свадьбы</div>
+                    <h3>Романтическая баллада</h3>
+                    <p>Глубокая эмоция, струнные и живой звук</p>
+                    <button class="play-btn" data-track="assets/audio/demo-wedding.mp3">▶ Воспроизвести</button>
+                </div>
+
+                <!-- Карточка 2: Юбилеи -->
+                <div class="audio-card">
+                    <div class="card-badge">Юбилеи</div>
+                    <h3>Драйвовый Фанк & Диско</h3>
+                    <p>Взрывной ритм для ярких танцев</p>
+                    <button class="play-btn" data-track="assets/audio/demo-event.mp3">▶ Воспроизвести</button>
+                </div>
+
+                <!-- Карточка 3: B2B -->
+                <div class="audio-card">
+                    <div class="card-badge">B2B & Корпоративы</div>
+                    <h3>Статусный Deep Lounge</h3>
+                    <p>Премиальный саундтрек для презентаций</p>
+                    <button class="play-btn" data-track="assets/audio/demo-b2b.mp3">▶ Воспроизвести</button>
+                </div>
+
+                <!-- Карточка 4: Гендер-пати -->
+                <div class="audio-card">
+                    <div class="card-badge">Гендер-пати</div>
+                    <h3>Светлый Инди-Поп</h3>
+                    <p>Трогательный момент раскрытия секретов</p>
+                    <button class="play-btn" data-track="assets/audio/demo-genderparty.mp3">▶ Воспроизвести</button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Скрытый аудиоэлемент для фонового звука -->
+    <audio id="audio-player"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
