@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Элементы Welcome-экрана и звука
     const welcomeScreen = document.getElementById('welcome-screen');
     const sealButton = document.getElementById('seal-button');
     const mainHub = document.getElementById('main-hub');
@@ -7,22 +6,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isEnvelopeOpened = false;
 
-    // --- 1. ЛОГИКА ВСКРЫТИЯ КОНВЕРТА ---
-    sealButton.addEventListener('click', () => {
+    // --- 1. ЛОГИКА ВСКРЫТИЯ КОНВЕРТА С АДАПТАЦИЕЙ ПОД МОБИЛЬНЫЕ ---
+    const openEnvelope = () => {
         if (isEnvelopeOpened) return;
         isEnvelopeOpened = true;
 
-        // Запускаем звук пред-вечеринки и глухой кульминационный бум
+        // Воспроизводим звук моментально при касании пальцем
         audioPlayer.src = 'assets/audio/welcome.mp3';
-        audioPlayer.play().catch(error => {
-            console.log("Автовоспроизведение заблокировано браузером:", error);
-        });
+        
+        // Запуск аудио
+        const playPromise = audioPlayer.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log("Мобильный браузер ограничил автозвук, продолжаем без звука:", error);
+            });
+        }
 
         // Анимация визуального клика по печати
-        sealButton.style.transform = 'scale(0.9) rotate(-5deg)';
-        sealButton.style.opacity = '0.5';
+        sealButton.style.transform = 'scale(0.85) rotate(-8deg)';
+        sealButton.style.opacity = '0.4';
 
-        // Через 1.5 секунды плавно скрываем Welcome-экран и показываем главный HUB
+        // Плавный переход к главному экрану
         setTimeout(() => {
             welcomeScreen.style.opacity = '0';
             
@@ -30,20 +34,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 welcomeScreen.style.display = 'none';
                 mainHub.classList.remove('hidden');
                 mainHub.style.opacity = '1';
-            }, 800);
+            }, 600);
 
-        }, 1500);
-    });
+        }, 1200);
+    };
+
+    // Поддерживаем и обычный клик, и быстрое касание на смартфоне (touchstart)
+    sealButton.addEventListener('click', openEnvelope);
+    sealButton.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Предотвращаем задержку двойного тапа на смартфонах
+        openEnvelope();
+    }, { passive: false });
+
 
     // --- 2. ЛОГИКА АУДИО-ПЛЕЕРА В ВИТРИНЕ ---
     const playButtons = document.querySelectorAll('.play-btn');
     let currentPlayingBtn = null;
 
     playButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        const handleTrackPlay = (e) => {
+            if (e.type === 'touchstart') e.preventDefault();
+
             const trackSrc = button.getAttribute('data-track');
 
-            // Если нажат тот же трек, который сейчас играет — ставим на паузу
+            // Пауза, если нажат тот же трек
             if (currentPlayingBtn === button && !audioPlayer.paused) {
                 audioPlayer.pause();
                 button.textContent = '▶ Воспроизвести';
@@ -51,12 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Сбрасываем текст у предыдущей кнопки
+            // Сброс предыдущей кнопки
             if (currentPlayingBtn) {
                 currentPlayingBtn.textContent = '▶ Воспроизвести';
             }
 
-            // Включаем новый трек
+            // Включение нового трека
             audioPlayer.src = trackSrc;
             audioPlayer.play().then(() => {
                 button.textContent = '⏸ Пауза';
@@ -64,10 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }).catch(err => {
                 console.error("Ошибка воспроизведения трека:", err);
             });
-        });
+        };
+
+        button.addEventListener('click', handleTrackPlay);
+        button.addEventListener('touchstart', handleTrackPlay, { passive: false });
     });
 
-    // Когда трек заканчивается — возвращаем кнопке исходный текст
+    // Возврат текста кнопки по окончании трека
     audioPlayer.addEventListener('ended', () => {
         if (currentPlayingBtn) {
             currentPlayingBtn.textContent = '▶ Воспроизвести';
