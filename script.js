@@ -4,6 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainHub = document.getElementById('main-hub');
     const audioPlayer = document.getElementById('audio-player');
 
+    // --- ПРОВЕРКА ВОЗВРАТА ИЗ ДЕМО (ПРОПУСК WELCOME) ---
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('from_demo') === 'true' || window.location.hash === '#invitations-catalog') {
+        if (welcomeScreen) welcomeScreen.style.display = 'none';
+        if (mainHub) {
+            mainHub.classList.remove('hidden');
+            mainHub.style.opacity = '1';
+        }
+    }
+
     // Элементы единого плеера
     const globalToggleBtn = document.getElementById('global-toggle-btn');
     const globalVolume = document.getElementById('global-volume');
@@ -167,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "🎥 Видео-обращение к гостям",
                 "🎁 Вишлист и форма пожеланий"
             ],
-            demoUrl: "#"
+            demoUrl: "anniversary-demo.html"
         },
         genderparty: {
             title: "Шаблон «Boy or Girl?»",
