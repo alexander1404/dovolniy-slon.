@@ -199,23 +199,148 @@ body {
 
 .hero-section {
     text-align: center;
-    padding: 60px 20px;
+    padding: 50px 20px;
 }
 
 .hero-title {
     font-family: var(--font-heading);
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     color: var(--gold);
     margin-bottom: 15px;
 }
 
 .hero-subtitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--text-muted);
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
 }
 
+/* --- КАТАЛОГ ШАБЛОНОВ --- */
+.catalog-section {
+    padding: 40px 0;
+}
+
+.catalog-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+}
+
+.category-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 35px;
+}
+
+.tab-btn {
+    background: var(--card-bg);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    color: var(--text-main);
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover, .tab-btn.active {
+    background: var(--gold);
+    color: var(--bg-dark);
+    font-weight: 600;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.sample-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.sample-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+}
+
+.sample-preview {
+    height: 140px;
+    background: #1c1c24;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sample-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(10, 10, 12, 0.8);
+    color: var(--gold);
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.open-demo-btn {
+    background: var(--gold);
+    color: var(--bg-dark);
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.sample-card h3 {
+    padding: 18px 20px 6px;
+    font-size: 1.15rem;
+    color: var(--text-main);
+}
+
+.sample-card p {
+    padding: 0 20px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    flex-grow: 1;
+    line-height: 1.4;
+}
+
+.card-footer {
+    padding: 18px 20px;
+}
+
+.btn-order {
+    width: 100%;
+    padding: 8px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s, color 0.3s;
+}
+
+.btn-order:hover {
+    background: var(--gold);
+    color: var(--bg-dark);
+}
+
+/* --- АУДИО ВИТРИНА --- */
 .showcase-section {
     padding: 30px 0;
 }
@@ -275,128 +400,118 @@ body {
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
-}/* --- КАТАЛОГ ШАБЛОНОВ --- */
-.catalog-section {
-    padding: 50px 0;
 }
 
-.catalog-subtitle {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    margin-bottom: 30px;
-}
-
-/* Табы фильтров */
-.category-tabs {
+/* --- МОДАЛЬНОЕ ОКНО И ГАЛЕРЕЯ --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 10, 12, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 35px;
-}
-
-.tab-btn {
-    background: var(--card-bg);
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    color: var(--text-main);
-    padding: 8px 18px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    transition: all 0.3s ease;
-}
-
-.tab-btn:hover, .tab-btn.active {
-    background: var(--gold);
-    color: var(--bg-dark);
-    font-weight: 600;
-}
-
-/* Сетка карточек */
-.catalog-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-}
-
-.sample-card {
-    background: var(--card-bg);
-    border: 1px solid rgba(212, 175, 55, 0.15);
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.sample-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--gold);
-}
-
-.sample-preview {
-    height: 160px;
-    background: #1c1c24;
-    position: relative;
-    display: flex;
     align-items: center;
-    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
-.sample-badge {
+.hidden-modal {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border: 1px solid var(--gold);
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 550px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.close-btn {
     position: absolute;
-    top: 12px;
-    left: 12px;
-    background: rgba(10, 10, 12, 0.8);
-    color: var(--gold);
-    font-size: 0.75rem;
-    padding: 4px 10px;
-    border-radius: 12px;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-}
-
-.open-demo-btn {
-    background: var(--gold);
-    color: var(--bg-dark);
+    top: 15px;
+    right: 20px;
+    background: none;
     border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-weight: 600;
+    color: var(--gold);
+    font-size: 2rem;
     cursor: pointer;
 }
 
-.sample-card h3 {
-    padding: 18px 20px 6px;
-    font-size: 1.15rem;
-    color: var(--text-main);
+.modal-body h2 {
+    font-family: var(--font-heading);
+    color: var(--gold);
+    margin: 10px 0;
+    font-size: 1.5rem;
 }
 
-.sample-card p {
-    padding: 0 20px;
-    font-size: 0.85rem;
+.modal-body p {
     color: var(--text-muted);
-    flex-grow: 1;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
     line-height: 1.4;
 }
 
-.card-footer {
-    padding: 18px 20px;
+.modal-gallery, .modal-features {
+    margin-bottom: 20px;
 }
 
-.btn-order {
+.modal-gallery h4, .modal-features h4 {
+    color: var(--text-main);
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.gallery-item {
     width: 100%;
-    padding: 8px;
-    background: transparent;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.3s, color 0.3s;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
-.btn-order:hover {
+.modal-features ul {
+    list-style: none;
+    padding: 0;
+}
+
+.modal-features li {
+    font-size: 0.85rem;
+    color: var(--text-main);
+    margin-bottom: 6px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.btn-order-modal {
+    flex: 1;
+    text-align: center;
     background: var(--gold);
     color: var(--bg-dark);
+    padding: 10px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
 }
