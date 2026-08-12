@@ -4,20 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Довольный Слон | Премиум Ивенты & Шоу</title>
-><link rel="stylesheet" href="css/styles.css"><!-- Ускоряем загрузку ключевых ассетов для мобильных -->
+    
+    <!-- Подключаем стили из корня -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Предзагрузка ключевых картинок для скорости -->
     <link rel="preload" href="assets/images/envelope-bg.webp" as="image">
     <link rel="preload" href="assets/images/seal-stamp.png" as="image">
-    <!-- Подключаем стильный шрифт с поддержкой кириллицы -->
+
+    <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- ЭКРАН 1: Конверт с печатью (Welcome Screen) -->
+    <!-- ЭКРАН 1: Приглашение (Конверт с печатью) -->
     <section id="welcome-screen" class="welcome-screen">
         <div class="envelope-wrapper">
-            <img src="assets/images/envelope-bg.webp" alt="Премиум конверт" class="envelope-bg">
+            <img src="assets/images/envelope-bg.webp" alt="Конверт" class="envelope-bg">
             <button id="seal-button" class="seal-button" aria-label="Вскрыть печать">
                 <img src="assets/images/seal-stamp.png" alt="Печать Довольный Слон" class="seal-stamp">
             </button>
@@ -25,10 +30,9 @@
         <p class="welcome-hint">Нажмите на печать, чтобы открыть приглашение</p>
     </section>
 
-    <!-- ЭКРАН 2: Главный интерфейс (HUB) -->
+    <!-- ЭКРАН 2: Главный хаб -->
     <main id="main-hub" class="main-hub hidden">
         
-        <!-- Хедер -->
         <header class="site-header">
             <div class="logo">
                 <img src="assets/images/seal-stamp.png" alt="Логотип" class="header-logo">
@@ -41,44 +45,54 @@
             </nav>
         </header>
 
-        <!-- Герой-блок -->
+        <!-- ЕДИНАЯ ПАНЕЛЬ ГЛОБАЛЬНОГО ПЛЕЕРА -->
+        <div id="global-player-bar" class="global-player-bar">
+            <div class="player-info">
+                <span class="playing-icon">🎵</span>
+                <span id="player-track-title">Приветствие: Довольный Слон</span>
+            </div>
+            <div class="player-controls">
+                <button id="global-toggle-btn" class="ctrl-btn">⏸ Пауза</button>
+                <div class="volume-box">
+                    <span class="vol-icon">🔊</span>
+                    <input type="range" id="global-volume" min="0" max="1" step="0.05" value="0.8">
+                </div>
+            </div>
+        </div>
+
         <section class="hero-section">
             <h1 class="hero-title">События, которые невозможно забыть</h1>
             <p class="hero-subtitle">Создаем эксклюзивную атмосферу для свадеб, юбилеев и закрытых мероприятий</p>
         </section>
 
-        <!-- Раздел с Аудио-плеером -->
+        <!-- Аудио-витрина -->
         <section id="showcase" class="showcase-section">
             <h2 class="section-title">Аудио-Атмосфера</h2>
             <div class="audio-grid">
                 
-                <!-- Карточка 1: Свадьбы -->
                 <div class="audio-card">
-                    <div class="card-badge">Свадьбы</div>
+                    <span class="card-badge">Свадьбы</span>
                     <h3>Романтическая баллада</h3>
                     <p>Глубокая эмоция, струнные и живой звук</p>
                     <button class="play-btn" data-track="assets/audio/demo-wedding.mp3">▶ Воспроизвести</button>
                 </div>
 
-                <!-- Карточка 2: Юбилеи -->
                 <div class="audio-card">
-                    <div class="card-badge">Юбилеи</div>
+                    <span class="card-badge">Юбилеи</span>
                     <h3>Драйвовый Фанк & Диско</h3>
                     <p>Взрывной ритм для ярких танцев</p>
                     <button class="play-btn" data-track="assets/audio/demo-event.mp3">▶ Воспроизвести</button>
                 </div>
 
-                <!-- Карточка 3: B2B -->
                 <div class="audio-card">
-                    <div class="card-badge">B2B & Корпоративы</div>
+                    <span class="card-badge">B2B & Корпоративы</span>
                     <h3>Статусный Deep Lounge</h3>
                     <p>Премиальный саундтрек для презентаций</p>
                     <button class="play-btn" data-track="assets/audio/demo-b2b.mp3">▶ Воспроизвести</button>
                 </div>
 
-                <!-- Карточка 4: Гендер-пати -->
                 <div class="audio-card">
-                    <div class="card-badge">Гендер-пати</div>
+                    <span class="card-badge">Гендер-пати</span>
                     <h3>Светлый Инди-Поп</h3>
                     <p>Трогательный момент раскрытия секретов</p>
                     <button class="play-btn" data-track="assets/audio/demo-genderparty.mp3">▶ Воспроизвести</button>
@@ -89,9 +103,7 @@
 
     </main>
 
-    <!-- Скрытый аудиоэлемент для фонового звука -->
     <audio id="audio-player" preload="none"></audio>
-
     <script src="script.js"></script>
 </body>
 </html>

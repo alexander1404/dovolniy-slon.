@@ -4,91 +4,118 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainHub = document.getElementById('main-hub');
     const audioPlayer = document.getElementById('audio-player');
 
-    let isEnvelopeOpened = false;
+    // Элементы единого плеера
+    const globalToggleBtn = document.getElementById('global-toggle-btn');
+    const globalVolume = document.getElementById('global-volume');
+    const playerTrackTitle = document.getElementById('player-track-title');
 
-    // --- 1. ЛОГИКА ВСКРЫТИЯ КОНВЕРТА С АДАПТАЦИЕЙ ПОД МОБИЛЬНЫЕ ---
-    const openEnvelope = () => {
-        if (isEnvelopeOpened) return;
-        isEnvelopeOpened = true;
+    let currentCardBtn = null;
+    let isOpened = false;
 
-        // Воспроизводим звук моментально при касании пальцем
+    // Начальная громкость 80%
+    audioPlayer.volume = 0.8;
+
+    // Функция обновления состояния кнопок
+    const syncControlsState = (isPlaying, title) => {
+        if (title) playerTrackTitle.textContent = title;
+        globalToggleBtn.textContent = isPlaying ? '⏸ Пауза' : '▶ Играть';
+    };
+
+    // --- 1. ВСКРЫТИЕ КОНВЕРТА (СТАРТ WELCOME-ЗВУКА) ---
+    const handleOpen = (e) => {
+        if (e) e.preventDefault();
+        if (isOpened) return;
+        isOpened = true;
+
+        // Включаем welcome.mp3 через единый плеер
         audioPlayer.src = 'assets/audio/welcome.mp3';
-        
-        // Запуск аудио
-        const playPromise = audioPlayer.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                console.log("Мобильный браузер ограничил автозвук, продолжаем без звука:", error);
-            });
+        audioPlayer.play().then(() => {
+            syncControlsState(true, 'Приветствие: Довольный Слон');
+        }).catch(err => console.log("Автозвук заблокирован:", err));
+
+        // Анимация печати
+        const stamp = sealButton.querySelector('.seal-stamp');
+        if (stamp) {
+            stamp.style.transform = 'scale(0.85) rotate(-8deg)';
+            stamp.style.opacity = '0.4';
         }
 
-        // Анимация визуального клика по печати
-        sealButton.style.transform = 'scale(0.85) rotate(-8deg)';
-        sealButton.style.opacity = '0.4';
-
-        // Плавный переход к главному экрану
+        // Переход на главный экран
         setTimeout(() => {
             welcomeScreen.style.opacity = '0';
-            
             setTimeout(() => {
                 welcomeScreen.style.display = 'none';
                 mainHub.classList.remove('hidden');
-                mainHub.style.opacity = '1';
-            }, 600);
-
+            }, 800);
         }, 1200);
     };
 
-    // Поддерживаем и обычный клик, и быстрое касание на смартфоне (touchstart)
-    sealButton.addEventListener('click', openEnvelope);
-    sealButton.addEventListener('touchstart', (e) => {
-        e.preventDefault(); // Предотвращаем задержку двойного тапа на смартфонах
-        openEnvelope();
-    }, { passive: false });
+    sealButton.addEventListener('click', handleOpen);
+    sealButton.addEventListener('touchstart', handleOpen, { passive: false });
 
+    // --- 2. ЕДИНАЯ КНОПКА ПАУЗЫ / СТАРТА ---
+    globalToggleBtn.addEventListener('click', () => {
+        if (!audioPlayer.src) return;
 
-    // --- 2. ЛОГИКА АУДИО-ПЛЕЕРА В ВИТРИНЕ ---
+        if (!audioPlayer.paused) {
+            audioPlayer.pause();
+            syncControlsState(false);
+            if (currentCardBtn) currentCardBtn.textContent = '▶ Воспроизвести';
+        } else {
+            audioPlayer.play();
+            syncControlsState(true);
+            if (currentCardBtn) currentCardBtn.textContent = '⏸ Пауза';
+        }
+    });
+
+    // --- 3. РЕГУЛЯТОР ГРОМКОСТИ ---
+    globalVolume.addEventListener('input', (e) => {
+        audioPlayer.volume = e.target.value;
+    });
+
+    // --- 4. КАРТОЧКИ ВИТРИНЫ ---
     const playButtons = document.querySelectorAll('.play-btn');
-    let currentPlayingBtn = null;
 
-    playButtons.forEach(button => {
-        const handleTrackPlay = (e) => {
-            if (e.type === 'touchstart') e.preventDefault();
+    playButtons.forEach(btn => {
+        const toggleTrack = (e) => {
+            if (e) e.preventDefault();
 
-            const trackSrc = button.getAttribute('data-track');
+            const src = btn.getAttribute('data-track');
+            const cardTitle = btn.parentElement.querySelector('h3').textContent;
 
-            // Пауза, если нажат тот же трек
-            if (currentPlayingBtn === button && !audioPlayer.paused) {
+            // Если нажата та же кнопка — ставим на паузу
+            if (currentCardBtn === btn && !audioPlayer.paused) {
                 audioPlayer.pause();
-                button.textContent = '▶ Воспроизвести';
-                currentPlayingBtn = null;
+                btn.textContent = '▶ Воспроизвести';
+                syncControlsState(false);
+                currentCardBtn = null;
                 return;
             }
 
-            // Сброс предыдущей кнопки
-            if (currentPlayingBtn) {
-                currentPlayingBtn.textContent = '▶ Воспроизвести';
+            // Сбрасываем подсвеченную кнопку
+            if (currentCardBtn) {
+                currentCardBtn.textContent = '▶ Воспроизвести';
             }
 
-            // Включение нового трека
-            audioPlayer.src = trackSrc;
+            // Переключаем трек в едином плеере
+            audioPlayer.src = src;
             audioPlayer.play().then(() => {
-                button.textContent = '⏸ Пауза';
-                currentPlayingBtn = button;
-            }).catch(err => {
-                console.error("Ошибка воспроизведения трека:", err);
-            });
+                btn.textContent = '⏸ Пауза';
+                currentCardBtn = btn;
+                syncControlsState(true, `Сейчас играет: ${cardTitle}`);
+            }).catch(err => console.error("Ошибка трека:", err));
         };
 
-        button.addEventListener('click', handleTrackPlay);
-        button.addEventListener('touchstart', handleTrackPlay, { passive: false });
+        btn.addEventListener('click', toggleTrack);
+        btn.addEventListener('touchstart', toggleTrack, { passive: false });
     });
 
-    // Возврат текста кнопки по окончании трека
+    // Когда трек заканчивается
     audioPlayer.addEventListener('ended', () => {
-        if (currentPlayingBtn) {
-            currentPlayingBtn.textContent = '▶ Воспроизвести';
-            currentPlayingBtn = null;
+        if (currentCardBtn) {
+            currentCardBtn.textContent = '▶ Воспроизвести';
+            currentCardBtn = null;
         }
+        syncControlsState(false, 'Выберите трек для прослушивания');
     });
 });

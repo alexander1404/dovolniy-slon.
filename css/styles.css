@@ -1,9 +1,7 @@
-/* Переменные темы */
 :root {
     --bg-dark: #0a0a0c;
     --card-bg: #141419;
     --gold: #d4af37;
-    --gold-hover: #f3e5ab;
     --text-main: #f0f0f0;
     --text-muted: #a0a0a0;
     --font-heading: 'Cinzel', serif;
@@ -24,7 +22,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- WELCOME SCREEN (Конверт и печать) --- */
+/* --- WELCOME SCREEN --- */
 .welcome-screen {
     position: fixed;
     top: 0;
@@ -43,7 +41,7 @@ body {
 .envelope-wrapper {
     position: relative;
     width: 90%;
-    max-width: 500px;
+    max-width: 480px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,18 +60,15 @@ body {
     border: none;
     cursor: pointer;
     outline: none;
-    transition: transform 0.3s ease;
-}
-
-.seal-button:hover {
-    transform: scale(1.08);
+    touch-action: manipulation;
 }
 
 .seal-stamp {
-    width: 120px;
+    width: 110px;
     height: auto;
     filter: drop-shadow(0 10px 15px rgba(0,0,0,0.7));
     animation: pulse-glow 3s infinite ease-in-out;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 @keyframes pulse-glow {
@@ -83,7 +78,7 @@ body {
 
 .welcome-hint {
     margin-top: 25px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -92,9 +87,9 @@ body {
 /* --- MAIN HUB --- */
 .main-hub {
     opacity: 1;
-    transition: opacity 1s ease;
-    padding: 20px 40px;
-    max-width: 1200px;
+    transition: opacity 0.8s ease;
+    padding: 20px 30px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
@@ -103,7 +98,6 @@ body {
     opacity: 0;
 }
 
-/* Header */
 .site-header {
     display: flex;
     justify-content: space-between;
@@ -119,13 +113,13 @@ body {
 }
 
 .header-logo {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
 }
 
 .brand-title {
     font-family: var(--font-heading);
-    font-size: 1.1rem;
+    font-size: 1rem;
     letter-spacing: 2px;
     color: var(--gold);
 }
@@ -133,93 +127,143 @@ body {
 .nav-links a {
     color: var(--text-main);
     text-decoration: none;
-    margin-left: 25px;
-    font-size: 0.9rem;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: var(--gold);
+    margin-left: 20px;
+    font-size: 0.85rem;
 }
 
 .btn-gold {
     border: 1px solid var(--gold);
-    padding: 8px 18px;
+    padding: 6px 16px;
     border-radius: 20px;
     color: var(--gold) !important;
 }
 
-/* Hero Section */
+/* --- ЕДИНАЯ ПАНЕЛЬ ПЛЕЕРА --- */
+.global-player-bar {
+    margin: 20px 0;
+    background: var(--card-bg);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 12px 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--gold);
+    font-weight: 500;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.ctrl-btn {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.ctrl-btn:hover {
+    background: var(--gold);
+    color: var(--bg-dark);
+}
+
+.volume-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#global-volume {
+    accent-color: var(--gold);
+    cursor: pointer;
+    width: 80px;
+}
+
 .hero-section {
     text-align: center;
-    padding: 80px 20px;
+    padding: 60px 20px;
 }
 
 .hero-title {
     font-family: var(--font-heading);
-    font-size: 2.8rem;
+    font-size: 2.4rem;
     color: var(--gold);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--text-muted);
     max-width: 600px;
     margin: 0 auto;
 }
 
-/* Audio Showcase Grid */
 .showcase-section {
-    padding: 40px 0;
+    padding: 30px 0;
 }
 
 .section-title {
     font-family: var(--font-heading);
     color: var(--gold);
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 40px;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
 }
 
 .audio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
 }
 
 .audio-card {
     background-color: var(--card-bg);
-    border: 1px solid rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.15);
     border-radius: 12px;
-    padding: 25px;
-    position: relative;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    padding: 20px;
+    transition: transform 0.3s ease;
 }
 
 .audio-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
     border-color: var(--gold);
 }
 
 .card-badge {
     display: inline-block;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     color: var(--gold);
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-}
-
-.audio-card h3 {
-    font-size: 1.2rem;
     margin-bottom: 8px;
 }
 
+.audio-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+}
+
 .audio-card p {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .play-btn {
@@ -231,10 +275,4 @@ body {
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
-    transition: background 0.3s, color 0.3s;
-}
-
-.play-btn:hover {
-    background: var(--gold);
-    color: var(--bg-dark);
 }
