@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 6. МОДАЛЬНОЕ ОКНО ПРЕДПРОСМОТРА С ГАЛЕРЕЕЙ И ДЕМО ---
     const templatesData = {
         wedding: {
-            title: "Шаблон «Gold & Velvet»",
+            title: "Приглашение на Свадьбу",
             badge: "💍 Свадебное приглашение",
             desc: "Элегантный золотой стиль с музыкой, анимированной сургучной печатью и формой подтверждения присутствия.",
             images: [
@@ -165,22 +165,22 @@ document.addEventListener('DOMContentLoaded', () => {
             demoUrl: "#"
         },
         anniversary: {
-            title: "Шаблон «Grand Jubilee»",
+            title: "Приглашение на Юбилей",
             badge: "🥂 Приглашение на Юбилей",
-            desc: "Статусный дизайн с фотохроникой памятных событий и обратным отсчетом.",
+            desc: "Персональный шаблон для торжественного юбилея (пример: 50 лет Сергею Николаевичу Ткачеву).",
             images: [
                 "assets/images/envelope-bg.webp",
                 "assets/images/seal-stamp.png"
             ],
             features: [
-                "📜 История юбиляра в фотографиях",
-                "🎥 Видео-обращение к гостям",
-                "🎁 Вишлист и форма пожеланий"
+                "📜 История юбиляра и его увлечения",
+                "📍 Локация ресторана и дресс-код",
+                "🎁 Музыкальная RSVP-форма для гостей"
             ],
             demoUrl: "anniversary-demo.html"
         },
         genderparty: {
-            title: "Шаблон «Boy or Girl?»",
+            title: "Приглашение на Гендер-пати",
             badge: "👶 Gender Reveal",
             desc: "Интерактивный формат для интригующего вечера раскрытия пола будущего ребенка.",
             images: [
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
             demoUrl: "#"
         },
         birthday: {
-            title: "Шаблон «Party Night»",
+            title: "Приглашение на День рождения",
             badge: "🎂 День рождения",
             desc: "Яркий веб-пригласительный для незабываемой вечеринки с друзьями.",
             images: [
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
             demoUrl: "#"
         },
         b2b: {
-            title: "Шаблон «Corporate Event»",
+            title: "Приглашение на Корпоратив / B2B",
             badge: "💼 B2B & Корпоративы",
             desc: "Строгий деловой стиль для деловых презентаций, форумов и корпоративов.",
             images: [
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
             demoUrl: "#"
         },
         custom: {
-            title: "Шаблон «Custom Concept»",
+            title: "Индивидуальное Приглашение",
             badge: "🎭 Особые события",
             desc: "Индивидуальная разработка дизайна и интерактива под эксклюзивную концепцию.",
             images: [

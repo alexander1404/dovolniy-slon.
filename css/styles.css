@@ -1,11 +1,13 @@
 :root {
-    --bg-dark: #0a0a0c;
-    --card-bg: #141419;
+    --bg-dark: #0a0c10;
+    --card-bg: #141820;
     --gold: #d4af37;
-    --text-main: #f0f0f0;
-    --text-muted: #a0a0a0;
-    --font-heading: 'Cinzel', serif;
-    --font-body: 'Montserrat', sans-serif;
+    --text-main: #f0f4f8;
+    --text-muted: #94a3b8;
+    
+    /* Новые эксклюзивные шрифты */
+    --font-heading: 'Prata', serif;
+    --font-body: 'Jost', sans-serif;
 }
 
 * {
@@ -307,7 +309,8 @@ body {
 
 .sample-card h3 {
     padding: 18px 20px 6px;
-    font-size: 1.15rem;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
     color: var(--text-main);
 }
 
@@ -381,7 +384,8 @@ body {
 }
 
 .audio-card h3 {
-    font-size: 1.1rem;
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
     margin-bottom: 6px;
 }
 
@@ -399,6 +403,7 @@ body {
     color: var(--gold);
     border-radius: 6px;
     cursor: pointer;
+    font-family: var(--font-body);
     font-weight: 600;
 }
 
