@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Довольный Слон | Премиум Ивенты & Шоу</title>
+    <title>Довольный Слон | Интерактивные Приглашения & Шоу</title>
     
     <!-- Подключаем стили из корня -->
-    <link rel="stylesheet" href="css/styles.css">
+   <link rel="stylesheet" href="css/styles.css">
     
     <!-- Предзагрузка ключевых картинок для скорости -->
     <link rel="preload" href="assets/images/envelope-bg.webp" as="image">
@@ -39,6 +39,7 @@
                 <span class="brand-title">ДОВОЛЬНЫЙ СЛОН</span>
             </div>
             <nav class="nav-links">
+                <a href="#invitations-catalog">Шаблоны</a>
                 <a href="#showcase">Аудио-витрина</a>
                 <a href="#about">О нас</a>
                 <a href="#contacts" class="btn-gold">Связаться</a>
@@ -60,14 +61,127 @@
             </div>
         </div>
 
+        <!-- Герой-блок -->
         <section class="hero-section">
-            <h1 class="hero-title">События, которые невозможно забыть</h1>
-            <p class="hero-subtitle">Создаем эксклюзивную атмосферу для свадеб, юбилеев и закрытых мероприятий</p>
+            <h1 class="hero-title">Интерактивные Приглашения & События</h1>
+            <p class="hero-subtitle">Создаем стильные веб-приглашения с музыкой, таймингом и дресс-кодом для уникальных мероприятий</p>
+        </section>
+
+        <!-- РАЗДЕЛ: КАТАЛОГ ШАБЛОНОВ ПРИГЛАШЕНИЙ -->
+        <section id="invitations-catalog" class="catalog-section">
+            <h2 class="section-title">Образцы и Шаблоны Приглашений</h2>
+            <p class="catalog-subtitle">Выберите категорию вашего торжества, чтобы найти подходящий формат</p>
+
+            <!-- Кнопки-фильтры категорий -->
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="all">Все образцы</button>
+                <button class="tab-btn" data-category="wedding">💍 Свадьбы</button>
+                <button class="tab-btn" data-category="anniversary">🥂 Юбилеи</button>
+                <button class="tab-btn" data-category="genderparty">👶 Гендер-пати</button>
+                <button class="tab-btn" data-category="birthday">🎂 Дни рождения</button>
+                <button class="tab-btn" data-category="b2b">💼 B2B & Агентства</button>
+                <button class="tab-btn" data-category="custom">🎭 Особые события</button>
+            </div>
+
+            <!-- Сетка образцов -->
+            <div class="catalog-grid">
+                
+                <!-- 1. Свадьбы -->
+                <div class="sample-card" data-cat="wedding">
+                    <div class="sample-preview">
+                        <span class="sample-badge">Свадьба</span>
+                        <div class="preview-overlay">
+                            <button class="open-demo-btn" data-demo="wedding">👁 Предпросмотр</button>
+                        </div>
+                    </div>
+                    <h3>Шаблон «Gold & Velvet»</h3>
+                    <p>Премиум-дизайн: тайминг дня, схема проезда, палитра дресс-кода и RSVP-форма подтверждения присутствия.</p>
+                    <div class="card-footer">
+                        <button class="btn-order">Заказать такое</button>
+                    </div>
+                </div>
+
+                <!-- 2. Юбилей -->
+                <div class="sample-card" data-cat="anniversary">
+                    <div class="sample-preview">
+                        <span class="sample-badge">Юбилей</span>
+                        <div class="preview-overlay">
+                            <button class="open-demo-btn" data-demo="anniversary">👁 Предпросмотр</button>
+                        </div>
+                    </div>
+                    <h3>Шаблон «Grand Jubilee»</h3>
+                    <p>Статусный стиль: таймлайн важных дат, видео-приветствие именинника и форма сбора пожеланий.</p>
+                    <div class="card-footer">
+                        <button class="btn-order">Заказать такое</button>
+                    </div>
+                </div>
+
+                <!-- 3. Гендер-пати -->
+                <div class="sample-card" data-cat="genderparty">
+                    <div class="sample-preview">
+                        <span class="sample-badge">Gender Reveal</span>
+                        <div class="preview-overlay">
+                            <button class="open-demo-btn" data-demo="genderparty">👁 Предпросмотр</button>
+                        </div>
+                    </div>
+                    <h3>Шаблон «Boy or Girl?»</h3>
+                    <p>Интерактивное онлайн-голосование гостей (Мальчик/Девочка) с таймером и картой проведения.</p>
+                    <div class="card-footer">
+                        <button class="btn-order">Заказать такое</button>
+                    </div>
+                </div>
+
+                <!-- 4. День рождения -->
+                <div class="sample-card" data-cat="birthday">
+                    <div class="sample-preview">
+                        <span class="sample-badge">День рождения</span>
+                        <div class="preview-overlay">
+                            <button class="open-demo-btn" data-demo="birthday">👁 Предпросмотр</button>
+                        </div>
+                    </div>
+                    <h3>Шаблон «Party Night»</h3>
+                    <p>Яркий и динамичный формат: музыкальный плейлист от гостей, вишлист подарков и тайминг вечеринки.</p>
+                    <div class="card-footer">
+                        <button class="btn-order">Заказать такое</button>
+                    </div>
+                </div>
+
+                <!-- 5. B2B / Ивент-агентства -->
+                <div class="sample-card" data-cat="b2b">
+                    <div class="sample-preview">
+                        <span class="sample-badge">B2B & Корпоративы</span>
+                        <div class="preview-overlay">
+                            <button class="open-demo-btn" data-demo="b2b">👁 Предпросмотр</button>
+                        </div>
+                    </div>
+                    <h3>Шаблон «Corporate Event»</h3>
+                    <p>Строгий бренд-стиль: программы спикеров, QR-коды участников, логистика и трансфер гостей.</p>
+                    <div class="card-footer">
+                        <button class="btn-order">Заказать такое</button>
+                    </div>
+                </div>
+
+                <!-- 6. Кастомные события -->
+                <div class="sample-card" data-cat="custom">
+                    <div class="sample-preview">
+                        <span class="sample-badge">Необычные события</span>
+                        <div class="preview-overlay">
+                            <button class="open-demo-btn" data-demo="custom">👁 Предпросмотр</button>
+                        </div>
+                    </div>
+                    <h3>Шаблон «Custom Concept»</h3>
+                    <p>Разработка под ключ: уникальная механика, нестандартные анимации и авторское звуковое сопровождение.</p>
+                    <div class="card-footer">
+                        <button class="btn-order">Заказать такое</button>
+                    </div>
+                </div>
+
+            </div>
         </section>
 
         <!-- Аудио-витрина -->
         <section id="showcase" class="showcase-section">
-            <h2 class="section-title">Аудио-Атмосфера</h2>
+            <h2 class="section-title">Аудио-Атмосфера Приглашений</h2>
             <div class="audio-grid">
                 
                 <div class="audio-card">

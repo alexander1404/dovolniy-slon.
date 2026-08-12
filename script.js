@@ -118,4 +118,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         syncControlsState(false, 'Выберите трек для прослушивания');
     });
-});
+});// --- 5. ФИЛЬТРАЦИЯ КАТАЛОГА ПО КАТЕГОРИЯМ ---
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const sampleCards = document.querySelectorAll('.sample-card');
+
+    tabBtns.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Переключение активной кнопки
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tab.classList.add('active');
+
+            const selectedCategory = tab.getAttribute('data-category');
+
+            // Фильтрация карточек
+            sampleCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-cat');
+
+                if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
