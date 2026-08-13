@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анна & Максим | Приглашение на свадьбу</title>
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Prata&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Базовые стили для шаблона свадьбы */
+        :root {
+            --wedding-bg: #F9F8F6;
+            --wedding-text: #4A4A4A;
+            --wedding-accent: #B5A8B9; /* Лавандовый */
+            --wedding-gold: #C5A880;
+        }
+        
+        * { box-sizing: border-box; }
+        
+        body { 
+            margin: 0; 
+            font-family: 'Jost', sans-serif; 
+            background: var(--wedding-bg); 
+            color: var(--wedding-text); 
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3 { 
+            font-family: 'Prata', serif; 
+            font-weight: normal; 
+        }
+        
+        .hidden { display: none !important; }
+        
+        /* Экран 1: Конверт */
+        .wedding-welcome { 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            background: #1A1A1A; 
+            position: relative; 
+            z-index: 100; 
+            transition: opacity 1s ease; 
+        }
+        
+        .wedding-envelope { 
+            position: relative; 
+            max-width: 600px; 
+            width: 90%; 
+            cursor: pointer; 
+        }
+        
+        .wedding-envelope img.env-bg { 
+            width: 100%; 
+            height: auto; 
+            border-radius: 4px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5); 
+        }
+        
+        .wedding-envelope img.seal { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            width: 25%; 
+            transition: transform 0.3s ease; 
+        }
+        
+        .wedding-envelope:hover img.seal { 
+            transform: translate(-50%, -50%) scale(1.05); 
+        }
+        
+        /* Экран 2: Главный (Hero) */
+        .wedding-hero { 
+            height: 100vh; 
+            background: url('assets/images/wedding/wedding-hero.webp') center/cover no-repeat; 
+            background-color: #B5A8B9; /* Заглушка */
+            position: relative; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            color: #fff; 
+        }
+        
+        .wedding-hero::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; left: 0; right: 0; bottom: 0; 
+            background: rgba(0,0,0,0.2); 
+        }
+        
+        .hero-content { 
+            position: relative; 
+            z-index: 2; 
+            padding: 20px; 
+        }
+        
+        .hero-names { 
+            font-size: 4rem; 
+            margin: 0; 
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3); 
+        }
+        
+        .hero-date { 
+            font-size: 1.5rem; 
+            letter-spacing: 2px; 
+            margin-top: 10px; 
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        /* Таймер */
+        .timer { 
+            display: flex; 
+            gap: 15px; 
+            margin-top: 50px; 
+            justify-content: center; 
+            flex-wrap: wrap;
+        }
+        
+        .timer-item { 
+            display: flex; 
+            flex-direction: column; 
+            background: rgba(255,255,255,0.15); 
+            backdrop-filter: blur(8px); 
+            padding: 15px 20px; 
+            border-radius: 8px; 
+            border: 1px solid rgba(255,255,255,0.3); 
+            min-width: 80px;
+        }
+        
+        .timer-item span:first-child { 
+            font-size: 2.2rem; 
+            font-family: 'Prata', serif; 
+        }
+        
+        .timer-item span:last-child { 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            margin-top: 5px;
+        }
+
+        /* Общие секции */
+        .wedding-section { 
+            padding: 80px 20px; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            text-align: center; 
+        }
+        
+        .section-title { 
+            font-size: 2.5rem; 
+            color: var(--wedding-gold); 
+            margin-bottom: 30px; 
+        }
+        
+        .wedding-text { 
+            font-size: 1.1rem; 
+            line-height: 1.8; 
+            margin-bottom: 20px; 
+        }
+        
+        .card-block {
+            background: #fff; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            padding: 50px 30px;
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        /* Тайминг (Линия времени) */
+        .timeline { 
+            text-align: left; 
+            max-width: 500px; 
+            margin: 0 auto; 
+            position: relative; 
+            border-left: 2px solid var(--wedding-accent); 
+            padding-left: 30px; 
+        }
+        
+        .timeline-item { 
+            margin-bottom: 35px; 
+            position: relative; 
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-item::before { 
+            content: ''; 
+            position: absolute; 
+            left: -37px; 
+            top: 5px; 
+            width: 12px; 
+            height: 12px; 
+            border-radius: 50%; 
+            background: var(--wedding-gold); 
+            border: 3px solid #fff; 
+        }
+        
+        .time { 
+            font-family: 'Prata', serif; 
+            font-size: 1.5rem; 
+            color: var(--wedding-gold); 
+        }
+        
+        .event-title { 
+            font-size: 1.2rem; 
+            margin: 5px 0; 
+            font-weight: 500; 
+        }
+        
+        .event-desc { 
+            font-style: italic; 
+            color: #777; 
+            font-size: 0.95rem; 
+            line-height: 1.5;
+        }
+
+        /* Дресс-код (Палитра) */
+        .palette { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            margin-top: 30px; 
+            flex-wrap: wrap;
+        }
+        
+        .color-circle { 
+            width: 55px; 
+            height: 55px; 
+            border-radius: 50%; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
+
+        /* Форма RSVP */
+        .rsvp-form { 
+            text-align: left; 
+        }
+        
+        .form-group { 
+            margin-bottom: 25px; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        
+        .form-group label { 
+            margin-bottom: 10px; 
+            font-weight: 500; 
+            color: var(--wedding-gold);
+        }
+        
+        .form-group input[type="text"], 
+        .form-group select { 
+            padding: 15px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            font-family: inherit; 
+            font-size: 1rem;
+            background: #FAFAFA;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input[type="text"]:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--wedding-gold);
+        }
+        
+        .checkbox-group { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+        }
+        
+        .checkbox-group label {
+            color: var(--wedding-text);
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        
+        .btn-submit { 
+            background: var(--wedding-gold); 
+            color: #fff; 
+            border: none; 
+            padding: 18px 30px; 
+            border-radius: 8px; 
+            font-size: 1.1rem; 
+            font-weight: 500;
+            cursor: pointer; 
+            width: 100%; 
+            margin-top: 15px; 
+            transition: background 0.3s ease; 
+        }
+        
+        .btn-submit:hover { 
+            background: #b0956f; 
+        }
+
+        /* Адаптив для мобильных */
+        @media (max-width: 600px) {
+            .hero-names { font-size: 3rem; }
+            .section-title { font-size: 2rem; }
+            .timer-item { min-width: 65px; padding: 10px; }
+            .timer-item span:first-child { font-size: 1.6rem; }
+            .card-block { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ЭКРАН 1: КОНВЕРТ И ПЕЧАТЬ -->
+    <section id="welcome-screen" class="wedding-welcome">
+        <div class="wedding-envelope" id="open-envelope">
+            <img src="assets/images/wedding/wedding-envelope.webp" alt="Конверт" class="env-bg">
+            <img src="assets/images/wedding/wedding-seal.png" alt="Печать" class="seal">
+        </div>
+        <p style="color: rgba(255,255,255,0.7); margin-top: 25px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem;">Нажмите на печать</p>
+    </section>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ (Скрыт до клика) -->
+    <main id="main-content" class="hidden">
+        
+        <!-- ЭКРАН 2: HERO И ТАЙМЕР -->
+        <section class="wedding-hero">
+            <div class="hero-content">
+                <p style="text-transform: uppercase; letter-spacing: 4px; margin-bottom: 15px; font-size: 0.9rem;">Разделите с нами этот день</p>
+                <h1 class="hero-names">Анна & Максим</h1>
+                <p class="hero-date">09.09.2026</p>
+                
+                <div class="timer">
+                    <div class="timer-item"><span id="days">145</span><span>Дней</span></div>
+                    <div class="timer-item"><span id="hours">12</span><span>Часов</span></div>
+                    <div class="timer-item"><span id="minutes">34</span><span>Минут</span></div>
+                    <div class="timer-item"><span id="seconds">50</span><span>Секунд</span></div>
+                </div>
+            </div>
+            
+            <div style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite;">
+                <span style="font-size: 2rem; color: #fff; opacity: 0.7;">↓</span>
+            </div>
+        </section>
+
+        <!-- БЛОК: ПРИВЕТСТВИЕ -->
+        <section class="wedding-section">
+            <h2 class="section-title">Историческое событие</h2>
+            <p class="wedding-text">
+                Этот день настал! Мы официально меняем статус, и нам крайне необходимы свидетели этого исторического события (а еще те, кто поможет нам справиться со свадебным тортом).
+            </p>
+            <p class="wedding-text">
+                Будем бесконечно счастливы видеть вас на нашем празднике любви, смеха и отличной музыки!
+            </p>
+        </section>
+
+        <!-- БЛОК: ТАЙМИНГ -->
+        <div class="card-block">
+            <h2 class="section-title" style="text-align: center;">План дня</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="time">15:30</div>
+                    <div class="event-title">Welcome & Шампанское</div>
+                    <div class="event-desc">Знакомимся, обнимаемся и делаем первые сторис, пока макияж идеален</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">16:30</div>
+                    <div class="event-title">Трогательная церемония</div>
+                    <div class="event-desc">Готовим платочки, держимся крепко и обещаем громко аплодировать</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">17:30</div>
+                    <div class="event-title">Праздничный ужин</div>
+                    <div class="event-desc">Поднимаем первые тосты, вкусно едим и слушаем истории от ведущего</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">20:00</div>
+                    <div class="event-title">Музыка & Танцы</div>
+                    <div class="event-desc">Снимаем каблуки, развязываем галстуки и зажигаем на танцполе</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">21:30</div>
+                    <div class="event-title">Торт & Огни</div>
+                    <div class="event-desc">Самый сладкий момент вечера и загадывание желаний</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- БЛОК: ДРЕСС-КОД -->
+        <section class="wedding-section">
+            <h2 class="section-title">Дресс-код</h2>
+            <p class="wedding-text">
+                Мы очень стараемся сделать наш праздник красивым и гармоничным. Будем благодарны, если при выборе нарядов вы поддержите цветовую палитру нашего вечера.
+            </p>
+            <div class="palette">
+                <!-- Лаванда, Шалфей, Беж, Пыльная роза -->
+                <div class="color-circle" style="background: #B5A8B9;" title="Лавандовый"></div>
+                <div class="color-circle" style="background: #8FA395;" title="Приглушенный зеленый"></div>
+                <div class="color-circle" style="background: #E8DCCB;" title="Светлый беж"></div>
+                <div class="color-circle" style="background: #C49F98;" title="Пыльная роза"></div>
+            </div>
+            <p class="wedding-text" style="margin-top: 25px; font-size: 1rem; font-style: italic; color: #777;">
+                Но главное правило — чтобы вам было удобно танцевать и обниматься!
+            </p>
+        </section>
+
+        <!-- БЛОК: ПОДАРКИ (ВИШЛИСТ) -->
+        <div class="card-block">
+            <h2 class="section-title" style="text-align: center;">Подарки & Цветы</h2>
+            <p class="wedding-text">
+                <strong>О подарках:</strong> Главный подарок для нас — это вы и ваше отличное настроение! Но если вы хотите помочь нам в осуществлении нашей мечты, мы будем рады подаркам в конвертах.
+            </p>
+            <p class="wedding-text" style="margin-top: 20px;">
+                <strong>Вместо цветов:</strong> Пожалуйста, не дарите нам живые цветы — мы расстроимся, что не успеем ими насладиться. Будем очень рады, если вместо букета вы подарите нам бутылочку вашего любимого вина для нашей будущей семейной винотеки (или классную настольную игру).
+            </p>
+        </div>
+
+        <!-- БЛОК: ЛОКАЦИЯ -->
+        <section class="wedding-section">
+            <h2 class="section-title">Где всё пройдет?</h2>
+            <p class="wedding-text" style="font-size: 1.2rem; margin-bottom: 10px;">
+                <strong>Москва, МО, г. Балашиха, Леоновское шоссе, 2</strong><br>
+                Банкетный зал - "Ревиталь Парк"
+            </p>
+            <p class="wedding-text" style="color: #777; margin-bottom: 30px;">
+                Для вашего удобства мы организуем трансфер. Автобус будет ждать гостей в 14:30. Пожалуйста, отметьте в анкете ниже, потребуется ли вам место.
+            </p>
+            
+            <a href="https://yandex.ru/maps/-/..." target="_blank" class="btn-submit" style="display: inline-block; width: auto; text-decoration: none;">Проложить маршрут</a>
+        </section>
+
+        <!-- БЛОК: АНКЕТА ГОСТЯ (RSVP) -->
+        <div class="card-block" style="margin-bottom: 100px;">
+            <h2 class="section-title" style="text-align: center;">Ждем вашего ответа!</h2>
+            <p class="wedding-text" style="text-align: center; margin-bottom: 35px;">
+                Пожалуйста, подтвердите свое присутствие до 15 августа, чтобы мы могли идеально всё спланировать.
+            </p>
+            
+            <form class="rsvp-form" name="rsvp-wedding" method="POST" data-netlify="true">
+                <div class="form-group">
+                    <label>Имя и Фамилия</label>
+                    <input type="text" name="name" required placeholder="Например: Иван и Мария Ивановы">
+                </div>
+                
+                <div class="form-group">
+                    <label>Присутствие</label>
+                    <select name="attendance" required>
+                        <option value="yes">Да, с удовольствием буду!</option>
+                        <option value="no">К сожалению, не смогу</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Нужен ли трансфер?</label>
+                    <select name="transfer">
+                        <option value="yes">Да, нужен</option>
+                        <option value="no">Нет, приеду самостоятельно</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Предпочтения по напиткам</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="drinks" value="Шампанское"> Шампанское</label>
+                        <label><input type="checkbox" name="drinks" value="Белое вино"> Белое вино</label>
+                        <label><input type="checkbox" name="drinks" value="Красное вино"> Красное вино</label>
+                        <label><input type="checkbox" name="drinks" value="Крепкий алкоголь"> Крепкий алкоголь</label>
+                        <label><input type="checkbox" name="drinks" value="Безалкогольное"> Только безалкогольное</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Пищевые аллергии или диета</label>
+                    <input type="text" name="allergies" placeholder="Например: аллергия на орехи">
+                </div>
+
+                <div class="form-group">
+                    <label>Трек, под который вы точно пойдете танцевать</label>
+                    <input type="text" name="music" placeholder="Исполнитель - Название песни">
+                </div>
+
+                <button type="submit" class="btn-submit">Отправить ответ</button>
+            </form>
+        </div>
+
+    </main>
+
+    <!-- Скрипт для анимации вскрытия конверта -->
+    <script>
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const mainContent = document.getElementById('main-content');
+        const envelope = document.getElementById('open-envelope');
+
+        // Добавим простую анимацию для стрелочки
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }`;
+        document.head.appendChild(style);
+
+        envelope.addEventListener('click', () => {
+            // Плавное исчезновение первого экрана
+            welcomeScreen.style.opacity = '0';
+            
+            setTimeout(() => {
+                welcomeScreen.classList.add('hidden');
+                mainContent.classList.remove('hidden');
+                window.scrollTo(0, 0); // Прокрутка на самый верх
+                
+            }, 800);
+        });
+    </script>
+</body>
+</html>

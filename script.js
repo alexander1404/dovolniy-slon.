@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "📍 Карта и адрес локации",
                 "💌 RSVP-форма подтверждения присутствия"
             ],
-            demoUrl: "#"
+            demoUrl: "wedding-demo.html"
         },
         anniversary: {
             title: "Приглашение на Юбилей",
