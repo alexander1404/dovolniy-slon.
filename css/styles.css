@@ -791,4 +791,138 @@ body {
 
 .terms-list strong {
     color: var(--gold-light);
+}/* --- КОНТАКТЫ И ФОРМА --- */
+.contacts-section {
+    padding: 80px 0 60px;
+}
+
+.contacts-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    background: rgba(20, 24, 32, 0.6);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 16px;
+    padding: 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .contacts-container {
+        grid-template-columns: 1fr;
+        padding: 30px 20px;
+    }
+}
+
+.contacts-desc {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.messenger-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn-messenger {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #fff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.btn-messenger:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+}
+
+.telegram-btn { background: #2AABEE; }
+.whatsapp-btn { background: #25D366; }
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contact-form label {
+    color: var(--gold);
+    font-size: 0.9rem;
+}
+
+.contact-form input, .contact-form textarea {
+    background: rgba(10, 12, 16, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    border-color: var(--gold);
+}
+
+.btn-submit-form {
+    background: var(--gold);
+    color: var(--bg-dark);
+    border: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-submit-form:hover {
+    background: var(--gold-light);
+}
+
+/* --- ПОДВАЛ (FOOTER) --- */
+.site-footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
+    margin-top: 20px;
+}
+
+.footer-content p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+}
+
+.footer-content a {
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s ease;
+}
+
+.footer-content a:hover {
+    color: var(--gold-light);
+    text-decoration: underline;
 }
